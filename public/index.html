@@ -15,67 +15,67 @@
     
 
     <main>
-        <h2>About This Page</h2>
-        <p>This is a simple webpage created using HTML and CSS. It includes a header, navigation menu, main content section, and a footer. The design has been enhanced with modern styling elements like gradients, shadows, and hover effects.</p>
-        <p>Feel free to modify and expand upon this template to create your own unique webpage!</p>
+        <h2>Відомості про сторінку</h2>
+        <p>Ця сторінка створеня для того, щоб ви могли обрати свій улюблений колір</p>
+        <p>Обирай, не зволіка!</p>
         <a href="#learn-more" class="btn">Learn More</a>
 
-        <!-- Form Section -->
+        // Форма
         <section class="form-section">
             <h2>Tell Us About Yourself</h2>
             <form id="userForm">
                 <div class="form-group">
-                    <label for="name">Name:</label>
+                    <label for="name">Ім'я:</label>
                     <input type="text" id="name" name="name" required>
                 </div>
                 <div class="form-group">
-                    <label for="surname">Surname:</label>
+                    <label for="surname">Прізвище:</label>
                     <input type="text" id="surname" name="surname" required>
                 </div>
                 <div class="form-group">
-                    <label for="color">Favourite Colour:</label>
+                    <label for="color">Улюблений колір:</label>
                     <input type="color" id="color" name="color" value="#ff0000">
                 </div>
-                <button type="submit" class="btn">Submit</button>
+                <button type="submit" class="btn">Enter</button>
             </form>
         </section>
     </main>
 
     <footer>
-        <p>&copy; 2023 My Styled Webpage. All rights reserved.</p>
+        <p>&copy; Tviy ulybleniy colir 2025. All rights are reservedd</p>
     </footer>
 
     <script>
-        // JavaScript to handle form submission and export to CSV
+        // скрипт
         document.getElementById('userForm').addEventListener('submit', function (event) {
-            event.preventDefault(); // Prevent the form from submitting the traditional way
+            event.preventDefault(); // не даємо формі відправитись
 
-            // Get form values
+            // отримуємо значення
             const name = document.getElementById('name').value;
             const surname = document.getElementById('surname').value;
             const color = document.getElementById('color').value;
 
-            // Create CSV content
+            // таблиця csv
             const csvContent = `Name,Surname,Favourite Colour\n${name},${surname},${color}`;
 
-            // Create a Blob with the CSV content
+            
             const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
 
-            // Create a link element to trigger the download
+            // посилання для завантаження
             const link = document.createElement('a');
             link.href = URL.createObjectURL(blob);
             link.download = 'user_data.csv'; // Name of the file to be downloaded
             link.style.display = 'none';
 
-            // Append the link to the body and trigger the download
+            // завантажуємо
             document.body.appendChild(link);
             link.click();
 
-            // Clean up
+            // прибираємо  елементи для завантаження
             document.body.removeChild(link);
             URL.revokeObjectURL(link.href);
 
-            // Optionally, you can reset the form after submission
+            // ресетаємо форму
             this.reset();
         });
     </script>
