@@ -51,7 +51,7 @@
     </footer>
 
     <script>
-        // JavaScript to handle form submission
+        // JavaScript to handle form submission and export to CSV
         document.getElementById('userForm').addEventListener('submit', function (event) {
             event.preventDefault(); // Prevent the form from submitting the traditional way
 
@@ -60,22 +60,28 @@
             const surname = document.getElementById('surname').value;
             const color = document.getElementById('color').value;
 
-            // Send data to the server
-            fetch('/submit', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({ name, surname, color }),
-            })
-            .then(response => response.json())
-            .then(data => {
-                alert('Thank you for your submission!');
-                document.getElementById('userForm').reset(); // Reset the form
-            })
-            .catch((error) => {
-                console.error('Error:', error);
-            });
+            // Create CSV content
+            const csvContent = `Name,Surname,Favourite Colour\n${name},${surname},${color}`;
+
+            // Create a Blob with the CSV content
+            const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+
+            // Create a link element to trigger the download
+            const link = document.createElement('a');
+            link.href = URL.createObjectURL(blob);
+            link.download = 'user_data.csv'; // Name of the file to be downloaded
+            link.style.display = 'none';
+
+            // Append the link to the body and trigger the download
+            document.body.appendChild(link);
+            link.click();
+
+            // Clean up
+            document.body.removeChild(link);
+            URL.revokeObjectURL(link.href);
+
+            // Optionally, you can reset the form after submission
+            this.reset();
         });
     </script>
 
